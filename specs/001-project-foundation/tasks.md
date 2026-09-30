@@ -159,10 +159,10 @@ package compartilhado.
 
 **Depende de**: US1 a US4, porque documenta o que elas entregam.
 
-- [ ] T045 [US5] Escrever `README.md` na raiz com a sequência completa: clonar, instalar dependências, copiar `apps/api/.env.example` para `.env`, subir o banco, rodar migrations, iniciar API, Admin e Mobile (FR-021)
-- [ ] T046 [US5] Documentar no `README.md` que `apps/api/.env` é a fonte única das credenciais, consumida também pelo Docker Compose via `--env-file` (FR-019)
-- [ ] T047 [US5] [P] Escrever `CLAUDE.md` na raiz com as regras operacionais do repositório (estrutura, scripts, restrições de stack), **referenciando** `.specify/memory/constitution.md` como fonte de verdade e sem duplicar seu conteúdo nem o do README (FR-022)
-- [ ] T048 [US5] Confirmar que `apps/admin` e `apps/mobile` **não** têm arquivo de ambiente, por não consumirem configuração nesta feature (research.md D8)
+- [X] T045 [US5] Escrever `README.md` na raiz com a sequência completa: clonar, instalar dependências, copiar `apps/api/.env.example` para `.env`, subir o banco, rodar migrations, iniciar API, Admin e Mobile (FR-021)
+- [X] T046 [US5] Documentar no `README.md` que `apps/api/.env` é a fonte única das credenciais, consumida também pelo Docker Compose via `--env-file` (FR-019)
+- [X] T047 [US5] [P] Escrever `CLAUDE.md` na raiz com as regras operacionais do repositório (estrutura, scripts, restrições de stack), **referenciando** `.specify/memory/constitution.md` como fonte de verdade e sem duplicar seu conteúdo nem o do README (FR-022)
+- [X] T048 [US5] Confirmar que `apps/admin` e `apps/mobile` **não** têm arquivo de ambiente, por não consumirem configuração nesta feature (research.md D8)
 
 **Checkpoint**: passo 12 do `quickstart.md` passa.
 
