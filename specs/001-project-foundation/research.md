@@ -191,6 +191,21 @@ atrito da História 2.
 
 Nota: o scaffold do Nest 12 entrega `"type": "module"` (ESM), Vitest e oxlint por padrão.
 
+**Admin (registrado em T027, 2026-09-30)**:
+
+| Pacote | Versão |
+|--------|--------|
+| next | 16.3.7 |
+| react / react-dom | 19.2.8 |
+| tailwindcss | 4.3.3 (**v4** — configuração via CSS, `@import "tailwindcss"`, sem `tailwind.config.js`) |
+| @tailwindcss/postcss | 4.3.3 |
+| eslint | 9.39.5 (flat config, `eslint-config-next`) |
+| typescript (admin) | 5.9.3 |
+
+Nota: o Admin declara `typescript@^5` e `@types/node@^20`, enquanto a API usa `typescript@^6`. O npm
+workspaces resolve o conflito instalando as versões do Admin em `apps/admin/node_modules/`, com o
+restante hoisted na raiz — comportamento esperado, não resíduo do scaffold.
+
 **Alternatives considered**:
 - *Fixar versões exatas agora*: risco alto de o plano nascer desatualizado ou incoerente entre
   pacotes.

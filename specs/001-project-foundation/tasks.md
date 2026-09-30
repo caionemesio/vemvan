@@ -101,14 +101,14 @@ package compartilhado.
 
 **Independent Test**: Passo 7 do `quickstart.md`, com banco e API desligados.
 
-- [ ] T026 [US2] Gerar a aplicação Next.js em `apps/admin/` com `create-next-app` (TypeScript, Tailwind CSS, App Router) e ajustar `apps/admin/tsconfig.json` para estender `tsconfig.base.json`
-- [ ] T026a [US2] Reconciliar o scaffold com o workspace: remover `apps/admin/package-lock.json` e `apps/admin/node_modules/` criados pela CLI e rodar `npm install` na raiz (research.md D1)
-- [ ] T027 [US2] Registrar em `research.md` (seção D7) a versão do Next.js e **a versão do Tailwind instalada** — v4 configura por CSS (`@import "tailwindcss"`), v3 por `tailwind.config.js`; o resto da story depende de qual foi
-- [ ] T028 [US2] Inicializar o shadcn/ui em `apps/admin/` seguindo a documentação correspondente à versão do Tailwind identificada em T027, gerando `src/components/ui/` e `src/lib/utils.ts`
-- [ ] T029 [US2] Adicionar ao menos um componente do shadcn/ui em `apps/admin/src/components/ui/` (ex.: `button`) via CLI do shadcn
-- [ ] T030 [US2] Implementar a página inicial estática em `apps/admin/src/app/page.tsx` identificando o VemVan, usando o componente de T029 e classes do Tailwind — evidência de que ambos estão funcionais (FR-014)
-- [ ] T031 [US2] Manter a página inicial **sem View/ViewModel/Binder**: é uma tela estática de validação (FR-026, Constitution Princípio V)
-- [ ] T032 [US2] Definir `dev:admin` no `package.json` da raiz iniciando o Admin na **porta 3001**, para não colidir com a API (plan.md, tabela de scripts)
+- [X] T026 [US2] Gerar a aplicação Next.js em `apps/admin/` com `create-next-app` (TypeScript, Tailwind CSS, App Router) e ajustar `apps/admin/tsconfig.json` para estender `tsconfig.base.json`
+- [X] T026a [US2] Reconciliar o scaffold com o workspace: remover `apps/admin/package-lock.json` e `apps/admin/node_modules/` criados pela CLI e rodar `npm install` na raiz (research.md D1)
+- [X] T027 [US2] Registrar em `research.md` (seção D7) a versão do Next.js e **a versão do Tailwind instalada** — v4 configura por CSS (`@import "tailwindcss"`), v3 por `tailwind.config.js`; o resto da story depende de qual foi
+- [X] T028 [US2] Inicializar o shadcn/ui em `apps/admin/` seguindo a documentação correspondente à versão do Tailwind identificada em T027, gerando `src/components/ui/` e `src/lib/utils.ts`
+- [X] T029 [US2] Adicionar ao menos um componente do shadcn/ui em `apps/admin/src/components/ui/` (ex.: `button`) via CLI do shadcn
+- [X] T030 [US2] Implementar a página inicial estática em `apps/admin/src/app/page.tsx` identificando o VemVan, usando o componente de T029 e classes do Tailwind — evidência de que ambos estão funcionais (FR-014)
+- [X] T031 [US2] Manter a página inicial **sem View/ViewModel/Binder**: é uma tela estática de validação (FR-026, Constitution Princípio V)
+- [X] T032 [US2] Definir `dev:admin` no `package.json` da raiz iniciando o Admin na **porta 3001**, para não colidir com a API (plan.md, tabela de scripts)
 
 **Checkpoint**: passo 7 do `quickstart.md` passa.
 
