@@ -13,6 +13,7 @@
   "scripts": {
     "dev:api": "npm run start:dev --workspace apps/api",
     "dev:admin": "npm run dev --workspace apps/admin",
+    "dev:mobile": "npm run start --workspace apps/mobile --",
     "db:up": "docker compose --env-file apps/api/.env up -d",
     "db:down": "docker compose --env-file apps/api/.env down",
     "db:migrate": "npm run db:migrate --workspace apps/api",

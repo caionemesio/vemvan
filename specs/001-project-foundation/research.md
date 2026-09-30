@@ -206,6 +206,26 @@ Nota: o Admin declara `typescript@^5` e `@types/node@^20`, enquanto a API usa `t
 workspaces resolve o conflito instalando as versões do Admin em `apps/admin/node_modules/`, com o
 restante hoisted na raiz — comportamento esperado, não resíduo do scaffold.
 
+**Mobile (registrado na US3, 2026-09-30)**:
+
+| Pacote | Versão |
+|--------|--------|
+| expo (SDK) | 57.0.26 |
+| expo-router | 57.0.24 |
+| react-native | 0.86.3 |
+| react-native-web | 0.21.3 |
+| react / react-dom | 19.2.3 |
+| typescript (mobile) | ~6.0.3 |
+
+**React único no monorepo**: o React Native exige que `react` seja exatamente a versão do seu
+renderer (19.2.3), enquanto o `create-next-app` havia fixado 19.2.8 no Admin. Com duas versões, o npm
+hoista uma delas na raiz e o `react-native` (também hoisted) passa a resolver um React diferente do
+app — erro de runtime, apontado pelo `expo-doctor` como dependência duplicada. Decisão: o Admin foi
+alinhado a `react`/`react-dom` **19.2.3** (o Next 16 aceita `^19.0.0`), deixando uma única cópia na
+raiz. **Regra para o futuro**: a versão do React no monorepo é ditada pelo React Native; atualizar o
+Admin sozinho reintroduz o problema. Alternativa rejeitada: forçar a resolução no Metro via
+`resolveRequest` — funciona no bundle, mas esconde a duplicata e o `expo-doctor` continua falhando.
+
 **Alternatives considered**:
 - *Fixar versões exatas agora*: risco alto de o plano nascer desatualizado ou incoerente entre
   pacotes.
@@ -252,6 +272,14 @@ com o diretório de rotas — `app/` contém as rotas e os layouts, enquanto as 
 ViewModels ficam sob `features/`, referenciadas a partir das rotas. Isso é definido na primeira
 feature que tiver tela com comportamento; nesta, `app/index.tsx` é estática e não tem ViewModel nem
 Binder (FR-026).
+
+**Ajuste na implementação (2026-09-30)**: o template padrão do Expo SDK 57 coloca as rotas em
+`src/app/`, não em `app/`. Seguimos a convenção do template — o próprio argumento desta decisão é
+adotar a estrutura que o Expo recomenda —, então a tela inicial é `apps/mobile/src/app/index.tsx` e o
+layout raiz `apps/mobile/src/app/_layout.tsx`. O código de demonstração do template (abas, tela
+`explore`, componentes temáticos, `reset-project.js`) e as dependências usadas só por ele (`@expo/ui`,
+`expo-device`, `expo-glass-effect`, `expo-image`, `expo-symbols`, `expo-web-browser`) foram removidos;
+o `@expo/ui` continua presente de forma transitiva, como dependência do `expo-router`.
 
 **Alternatives considered**:
 - *Template em branco sem roteador*: era a decisão anterior deste documento, revertida. O argumento

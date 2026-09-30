@@ -120,13 +120,13 @@ package compartilhado.
 
 **Independent Test**: Passo 8 do `quickstart.md`, isoladamente.
 
-- [ ] T033 [US3] Gerar a aplicação Expo em `apps/mobile/` com `create-expo-app` usando o **template padrão com TypeScript**, que já inclui `expo-router` (research.md D9), e ajustar `apps/mobile/tsconfig.json` para estender `tsconfig.base.json`
-- [ ] T033a [US3] Reconciliar o scaffold com o workspace: remover `apps/mobile/package-lock.json` e `apps/mobile/node_modules/` criados pela CLI e rodar `npm install` na raiz (research.md D1)
-- [ ] T034 [US3] Configurar `apps/mobile/metro.config.js` para o monorepo: `watchFolders` incluindo a raiz e `nodeModulesPaths` cobrindo o `node_modules` da raiz e o do app (research.md D1)
-- [ ] T035 [US3] Implementar a tela inicial estática em `apps/mobile/app/index.tsx`, sob o layout raiz `apps/mobile/app/_layout.tsx`, indicando que o VemVan está funcionando, sem MVVM (FR-026)
-- [ ] T036 [US3] Definir `dev:mobile` no `package.json` da raiz iniciando o servidor de desenvolvimento do Expo
-- [ ] T037 [US3] Verificar que `apps/mobile/package.json` **não** contém `react-native-maps`, `expo-location`, `expo-notifications` nem `socket.io-client` (FR-025). O `expo-router` e suas dependências de suporte são esperados, por decisão D9
-- [ ] T038 [US3] Abrir o app em ao menos um alvo (emulador, dispositivo ou navegador) e confirmar a tela — compilar o bundle não basta (decisão de clarify nº 5)
+- [X] T033 [US3] Gerar a aplicação Expo em `apps/mobile/` com `create-expo-app` usando o **template padrão com TypeScript**, que já inclui `expo-router` (research.md D9), e ajustar `apps/mobile/tsconfig.json` para estender `tsconfig.base.json`
+- [X] T033a [US3] Reconciliar o scaffold com o workspace: remover `apps/mobile/package-lock.json` e `apps/mobile/node_modules/` criados pela CLI e rodar `npm install` na raiz (research.md D1)
+- [X] T034 [US3] Configurar `apps/mobile/metro.config.js` para o monorepo: `watchFolders` incluindo a raiz e `nodeModulesPaths` cobrindo o `node_modules` da raiz e o do app (research.md D1)
+- [X] T035 [US3] Implementar a tela inicial estática em `apps/mobile/app/index.tsx`, sob o layout raiz `apps/mobile/app/_layout.tsx`, indicando que o VemVan está funcionando, sem MVVM (FR-026) — **ajuste**: o template do SDK 57 usa `src/app/`, então os arquivos são `apps/mobile/src/app/index.tsx` e `src/app/_layout.tsx` (research.md D9)
+- [X] T036 [US3] Definir `dev:mobile` no `package.json` da raiz iniciando o servidor de desenvolvimento do Expo
+- [X] T037 [US3] Verificar que `apps/mobile/package.json` **não** contém `react-native-maps`, `expo-location`, `expo-notifications` nem `socket.io-client` (FR-025). O `expo-router` e suas dependências de suporte são esperados, por decisão D9
+- [X] T038 [US3] Abrir o app em ao menos um alvo (emulador, dispositivo ou navegador) e confirmar a tela — compilar o bundle não basta (decisão de clarify nº 5)
 
 **Checkpoint**: passo 8 do `quickstart.md` passa.
 
