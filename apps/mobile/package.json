@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "agent-device": "^0.21.17",
     "typescript": "~6.0.3"
   },
   "scripts": {

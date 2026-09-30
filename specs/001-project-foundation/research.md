@@ -287,3 +287,36 @@ o `@expo/ui` continua presente de forma transitiva, como dependência do `expo-r
   resto do plano, que adota ORM, framework de estilo e biblioteca de componentes sem uso de domínio.
 - *Adotar uma biblioteca de navegação diferente (React Navigation puro)*: é o que o `expo-router`
   usa por baixo; escolhê-lo direto significaria configurar à mão o que o padrão já entrega.
+
+---
+
+## D10 — Verificação do Mobile em dispositivo com `agent-device`
+
+**Decision**: `agent-device` (Callstack, 0.21.x) como devDependency de `apps/mobile`, para inspecionar
+e verificar o app em emulador/simulador via CLI (`npx agent-device ...`), MCP ou API Node. Alvo
+padrão de verificação: **emulador Android** (`Pixel_8`).
+
+**Rationale**: pedido explícito do usuário (2026-09-30). A clarify nº 5 exige abrir o app em um alvo
+real — compilar o bundle não basta —, e o `agent-device` torna essa verificação reproduzível e
+automatizável: lê a árvore de acessibilidade (`snapshot`, `wait text`, `is visible`) em vez de
+depender de inspeção manual de screenshot. Instalado no projeto, e não global, para que a versão
+fique fixada no lockfile. A peer dependency `ai` é opcional e **não** é instalada.
+
+**Nota operacional — rede do emulador** (descoberta na verificação da US3): por padrão o
+`expo start` anuncia o IP da LAN (`exp://<ip-da-lan>:8081`), que o emulador Android pode não alcançar
+dependendo da rede (foi o caso aqui: Expo Go preso no carregamento, `Cannot connect to Expo CLI` no
+logcat). O caminho que funciona:
+
+```bash
+adb reverse tcp:8081 tcp:8081
+npm run dev:mobile -- --localhost
+npx agent-device open "exp://127.0.0.1:8081" --platform android   # a partir de apps/mobile
+```
+
+Na primeira abertura o Expo Go exibe o menu de desenvolvedor por cima do app — fechar antes de
+verificar, senão o texto "VemVan" encontrado é o nome do projeto no menu, não a tela.
+
+**Alternatives considered**:
+- *Maestro / Detox*: frameworks de E2E com suíte própria. Não há comportamento a testar nesta
+  feature; o que se precisa hoje é verificação pontual por agente, que é o foco do `agent-device`.
+- *Instalação global*: mais simples, mas deixa a versão fora do controle do repositório.
