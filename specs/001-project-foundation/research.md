@@ -62,9 +62,25 @@ que é o que o endpoint de saúde precisa. Três parâmetros carregam decisões 
 explícitos no código:
 - `synchronize: false` → FR-007, torna visível que o schema nunca é sincronizado automaticamente.
 - `autoLoadModels: false` → FR-023, não há modelos nesta feature.
-- `retryAttempts: 0` → FR-005 (falha rápida). O padrão do módulo é **10 tentativas com 3s de
-  intervalo**, o que faria a API demorar ~30 segundos para morrer com o banco fora do ar, em vez de
-  falhar imediatamente. Sem esse ajuste, a decisão de clarify nº 2 não é cumprida.
+- `retryAttempts: 0` → mantido por consistência, mas **não é o que garante a falha rápida** (ver
+  correção abaixo).
+
+**Correção aplicada na implementação (2026-08-27)**: o factory de conexão do `@nestjs/sequelize`
+retorna **antes** de autenticar quando `autoLoadModels` é falso:
+
+```js
+if (!options.autoLoadModels) { return sequelize; }   // nunca chega no authenticate()
+await sequelize.authenticate();
+```
+
+Ou seja, as duas opções escolhidas acima se cancelavam: com `autoLoadModels: false` não existe
+verificação de conexão no boot, e `retryAttempts` se torna irrelevante. Na prática a API subia
+normalmente com o banco fora do ar — o oposto de FR-005.
+
+A validação de conexão passou a ser **explícita em `apps/api/src/main.ts`**: o bootstrap resolve a
+instância do Sequelize, chama `authenticate()` antes de `listen()` e encerra com código 1 e
+mensagem diagnosticável se falhar. Isso torna o requisito visível no código, em vez de depender de
+um efeito colateral da biblioteca — e não quebra se o comportamento interno dela mudar.
 
 **Alternatives considered**:
 - *Sequelize puro em um provider customizado*: mais código para replicar o que o módulo oficial já
@@ -86,6 +102,13 @@ TypeScript exige registrar `ts-node` por fora e é notoriamente frágil. O Umzug
 organização do Sequelize, é a engine que o próprio `sequelize-cli` embrulha, tem tipos de primeira
 classe e o runner cabe em ~40 linhas. Menos mágica, e a estratégia de migrations fica legível no
 próprio repositório.
+
+**Correção aplicada na implementação (2026-08-27)**: como o scaffold do Nest 12 é ESM
+(`"type": "module"`) e os imports usam extensão `.js`, o type-stripping nativo do Node não resolve
+os especificadores ao rodar o `.ts` direto. Os scripts `db:migrate` e `db:migrate:undo` passaram a
+compilar antes e executar `dist/database/migrator.js`. Isso evita adicionar `tsx`/`ts-node` só para
+desenvolvimento e é o mesmo comando que funciona em produção, onde não há toolchain de TypeScript.
+O `migrator.ts` já detecta se está rodando como `.ts` ou `.js` e ajusta o glob das migrations.
 
 **Alternatives considered**:
 - *`sequelize-cli`*: mais convencional e documentado, `db:migrate`/`db:migrate:undo` prontos. Perde
@@ -149,6 +172,24 @@ configuração é via CSS (`@import "tailwindcss"`) e não `tailwind.config.js`.
 v4, mas o comando de init e a estrutura de tokens diferem da v3. Seguir a documentação da versão
 que a CLI efetivamente instalar, e registrar a versão resultante aqui. Este é o principal risco de
 atrito da História 2.
+
+**Versões efetivamente instaladas (registrado em T012, 2026-08-27)**:
+
+| Pacote | Versão |
+|--------|--------|
+| Node | 22.23.2 |
+| npm | 10.9.8 |
+| @nestjs/core | ^12.0.1 |
+| @nestjs/sequelize | ^12.0.0 |
+| @nestjs/config | ^12.0.0 |
+| sequelize | ^6.37.8 |
+| sequelize-typescript | ^2.1.6 |
+| pg | ^8.23.0 |
+| umzug | ^3.8.3 |
+| typescript | ^6.0.2 |
+| PostgreSQL (imagem) | postgres:16-alpine |
+
+Nota: o scaffold do Nest 12 entrega `"type": "module"` (ESM), Vitest e oxlint por padrão.
 
 **Alternatives considered**:
 - *Fixar versões exatas agora*: risco alto de o plano nascer desatualizado ou incoerente entre

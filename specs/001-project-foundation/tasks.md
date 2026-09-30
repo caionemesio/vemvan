@@ -29,11 +29,11 @@ implementável e validável de forma independente.
 **Purpose**: Esqueleto do repositório. Nada de aplicação ainda.
 
 - [x] T001 ~~Inicializar o repositório git~~ — já feito: repositório em `/Users/caionemesio/Projects/Personal/vemvan`, branch `main`, com a constitution e a spec já commitadas
-- [ ] T002 Criar `package.json` na raiz com `"private": true`, `"workspaces": ["apps/*", "packages/*"]` e `"engines": { "node": ">=22" }` (research.md D1)
-- [ ] T003 [P] Criar `.nvmrc` na raiz fixando Node 22 LTS
-- [ ] T004 [P] Criar `.gitignore` na raiz cobrindo `node_modules/`, `dist/`, `.next/`, `.expo/`, `*.env` e mantendo `!*.env.example` (FR-020)
-- [ ] T005 [P] Criar os diretórios `apps/` e `packages/` conforme a árvore do plan.md
-- [ ] T006 Verificar que `git status --porcelain --ignored` não lista nenhum arquivo com credencial (SC-007, primeira verificação)
+- [X] T002 Criar `package.json` na raiz com `"private": true`, `"workspaces": ["apps/*", "packages/*"]` e `"engines": { "node": ">=22" }` (research.md D1)
+- [X] T003 [P] Criar `.nvmrc` na raiz fixando Node 22 LTS
+- [X] T004 [P] Criar `.gitignore` na raiz cobrindo `node_modules/`, `dist/`, `.next/`, `.expo/`, `*.env` e mantendo `!*.env.example` (FR-020)
+- [X] T005 [P] Criar os diretórios `apps/` e `packages/` conforme a árvore do plan.md
+- [X] T006 Verificar que `git status --porcelain --ignored` não lista nenhum arquivo com credencial (SC-007, primeira verificação)
 
 ---
 
@@ -43,8 +43,8 @@ implementável e validável de forma independente.
 
 **⚠️ CRITICAL**: Nenhuma user story pode começar antes desta fase.
 
-- [ ] T007 Criar `tsconfig.base.json` na raiz com `strict: true`, target/lib compatíveis com Node 22 e as opções comuns aos 4 pacotes (Constitution, Princípio III)
-- [ ] T008 Adicionar ao `package.json` da raiz o esqueleto dos scripts que serão preenchidos por story: `dev:api`, `dev:admin`, `dev:mobile`, `db:up`, `db:down`, `db:migrate`, `db:migrate:undo`, `build:shared`, `typecheck`, `build` (FR-003; a tabela de scripts está no plan.md)
+- [X] T007 Criar `tsconfig.base.json` na raiz com `strict: true`, target/lib compatíveis com Node 22 e as opções comuns aos 4 pacotes (Constitution, Princípio III)
+- [X] T008 Adicionar ao `package.json` da raiz o esqueleto dos scripts que serão preenchidos por story: `dev:api`, `dev:admin`, `dev:mobile`, `db:up`, `db:down`, `db:migrate`, `db:migrate:undo`, `build:shared`, `typecheck`, `build` (FR-003; a tabela de scripts está no plan.md) — **parcial**: criados apenas `dev:api`, `db:up`, `db:down`, `db:migrate`, `db:migrate:undo`. Os demais entram com suas stories (T032, T036, T042, T049, T050), para não deixar scripts apontando para workspaces inexistentes
 
 ---
 
@@ -57,39 +57,39 @@ package compartilhado.
 
 ### Banco de dados local
 
-- [ ] T009 [US1] Criar `docker-compose.yml` na raiz com serviço `postgres` (imagem PostgreSQL 16) e **volume nomeado** para persistência (FR-012), mapeando `DB_USER`/`DB_PASSWORD`/`DB_NAME` para as variáveis `POSTGRES_*` que a imagem exige e publicando a porta como **`${DB_PORT}:5432`** — é o que permite contornar conflito de porta na máquina alterando apenas `apps/api/.env`, sem editar arquivo versionado (edge case da spec)
-- [ ] T010 [US1] Definir `db:up` no `package.json` da raiz como `docker compose --env-file apps/api/.env up -d` e `db:down` como `docker compose --env-file apps/api/.env down` (research.md D6 — `env_file:` no serviço NÃO funciona para interpolação; e `down` sem `-v` para preservar o volume)
+- [X] T009 [US1] Criar `docker-compose.yml` na raiz com serviço `postgres` (imagem PostgreSQL 16) e **volume nomeado** para persistência (FR-012), mapeando `DB_USER`/`DB_PASSWORD`/`DB_NAME` para as variáveis `POSTGRES_*` que a imagem exige e publicando a porta como **`${DB_PORT}:5432`** — é o que permite contornar conflito de porta na máquina alterando apenas `apps/api/.env`, sem editar arquivo versionado (edge case da spec)
+- [X] T010 [US1] Definir `db:up` no `package.json` da raiz como `docker compose --env-file apps/api/.env up -d` e `db:down` como `docker compose --env-file apps/api/.env down` (research.md D6 — `env_file:` no serviço NÃO funciona para interpolação; e `down` sem `-v` para preservar o volume)
 
 ### Scaffolding da API
 
-- [ ] T011 [US1] Gerar a aplicação NestJS em `apps/api/` com a CLI oficial (`nest new`), TypeScript, e ajustar `apps/api/tsconfig.json` para estender `tsconfig.base.json`
-- [ ] T011a [US1] Reconciliar o scaffold com o workspace: remover `apps/api/package-lock.json` e `apps/api/node_modules/` criados pela CLI e rodar `npm install` na raiz, para que a resolução volte a ser hoisted (research.md D1)
-- [ ] T012 [US1] Registrar em `research.md` (seção D7) as versões efetivamente instaladas de NestJS, Sequelize e Node
-- [ ] T013 [US1] Instalar em `apps/api/` as dependências `@nestjs/sequelize`, `sequelize`, `pg`, `@nestjs/config` e `umzug` (research.md D3, D4)
-- [ ] T014 [US1] Definir `dev:api` no `package.json` da raiz apontando para o modo watch do workspace `apps/api`
+- [X] T011 [US1] Gerar a aplicação NestJS em `apps/api/` com a CLI oficial (`nest new`), TypeScript, e ajustar `apps/api/tsconfig.json` para estender `tsconfig.base.json`
+- [X] T011a [US1] Reconciliar o scaffold com o workspace: remover `apps/api/package-lock.json` e `apps/api/node_modules/` criados pela CLI e rodar `npm install` na raiz, para que a resolução volte a ser hoisted (research.md D1)
+- [X] T012 [US1] Registrar em `research.md` (seção D7) as versões efetivamente instaladas de NestJS, Sequelize e Node
+- [X] T013 [US1] Instalar em `apps/api/` as dependências `@nestjs/sequelize`, `sequelize`, `pg`, `@nestjs/config` e `umzug` (research.md D3, D4)
+- [X] T014 [US1] Definir `dev:api` no `package.json` da raiz apontando para o modo watch do workspace `apps/api`
 
 ### Configuração por ambiente
 
-- [ ] T015 [US1] Criar `apps/api/.env.example` versionado, documentando `NODE_ENV`, `PORT`, `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` e `DB_SSL`, **sem nenhuma credencial real** (FR-018)
-- [ ] T016 [US1] Implementar `apps/api/src/config/` com `@nestjs/config` e validação de schema que **falha no startup** quando faltar variável obrigatória, nomeando a variável ausente (research.md D8, edge case da spec)
+- [X] T015 [US1] Criar `apps/api/.env.example` versionado, documentando `NODE_ENV`, `PORT`, `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` e `DB_SSL`, **sem nenhuma credencial real** (FR-018)
+- [X] T016 [US1] Implementar `apps/api/src/config/` com `@nestjs/config` e validação de schema que **falha no startup** quando faltar variável obrigatória, nomeando a variável ausente (research.md D8, edge case da spec)
 
 ### Sequelize e falha rápida
 
-- [ ] T017 [US1] Implementar `apps/api/src/database/database.module.ts` com `SequelizeModule.forRootAsync`, lendo a configuração do módulo de config e definindo explicitamente `synchronize: false` (FR-007), `autoLoadModels: false` (FR-023) e **`retryAttempts: 0`** (FR-005)
-- [ ] T018 [US1] Verificar manualmente que, com o banco parado, `npm run dev:api` encerra em poucos segundos com erro explícito — e não após ~30s de tentativas (research.md D3; passo 5 do quickstart.md)
+- [X] T017 [US1] Implementar `apps/api/src/database/database.module.ts` com `SequelizeModule.forRootAsync`, lendo a configuração do módulo de config e definindo explicitamente `synchronize: false` (FR-007), `autoLoadModels: false` (FR-023) e **`retryAttempts: 0`** (FR-005)
+- [X] T018 [US1] Verificar manualmente que, com o banco parado, `npm run dev:api` encerra em poucos segundos com erro explícito — e não após ~30s de tentativas (research.md D3; passo 5 do quickstart.md)
 
 ### Migrations
 
-- [ ] T019 [US1] Implementar o runner Umzug em `apps/api/src/database/migrator.ts` com `SequelizeStorage`, apontando para `apps/api/src/database/migrations/` e expondo as operações de `up` e `down` (research.md D4)
-- [ ] T020 [US1] Definir `db:migrate` e `db:migrate:undo` no `package.json` da raiz, acionando o runner de T019
-- [ ] T021 [US1] Criar a única migration técnica em `apps/api/src/database/migrations/`, criando a tabela descartável `_foundation_check` (`id`, `created_at`) no `up` e removendo-a no `down` (FR-009, data-model.md T2)
-- [ ] T022 [US1] Verificar o ciclo completo: `db:migrate` cria a tabela e insere 1 linha em `SequelizeMeta`; `db:migrate` de novo é idempotente; `db:migrate:undo` remove a tabela e esvazia `SequelizeMeta` (SC-004)
+- [X] T019 [US1] Implementar o runner Umzug em `apps/api/src/database/migrator.ts` com `SequelizeStorage`, apontando para `apps/api/src/database/migrations/` e expondo as operações de `up` e `down` (research.md D4)
+- [X] T020 [US1] Definir `db:migrate` e `db:migrate:undo` no `package.json` da raiz, acionando o runner de T019
+- [X] T021 [US1] Criar a única migration técnica em `apps/api/src/database/migrations/`, criando a tabela descartável `_foundation_check` (`id`, `created_at`) no `up` e removendo-a no `down` (FR-009, data-model.md T2)
+- [X] T022 [US1] Verificar o ciclo completo: `db:migrate` cria a tabela e insere 1 linha em `SequelizeMeta`; `db:migrate` de novo é idempotente; `db:migrate:undo` remove a tabela e esvazia `SequelizeMeta` (SC-004)
 
 ### Endpoint de saúde
 
-- [ ] T023 [US1] Implementar `apps/api/src/health/health.controller.ts` e `health.module.ts` expondo `GET /health`, executando `sequelize.authenticate()` **a cada chamada** e respondendo `200`/`503` conforme `contracts/health.md`
-- [ ] T024 [US1] Verificar que a resposta de `/health` contém apenas `status` e `database`, sem host, usuário, nome do banco ou stack trace (`contracts/health.md`)
-- [ ] T025 [US1] Registrar `DatabaseModule`, `ConfigModule` e `HealthModule` em `apps/api/src/app.module.ts` e confirmar que `GET /health` é a **única** rota da aplicação (SC-008)
+- [X] T023 [US1] Implementar `apps/api/src/health/health.controller.ts` e `health.module.ts` expondo `GET /health`, executando `sequelize.authenticate()` **a cada chamada** e respondendo `200`/`503` conforme `contracts/health.md`
+- [X] T024 [US1] Verificar que a resposta de `/health` contém apenas `status` e `database`, sem host, usuário, nome do banco ou stack trace (`contracts/health.md`)
+- [X] T025 [US1] Registrar `DatabaseModule`, `ConfigModule` e `HealthModule` em `apps/api/src/app.module.ts` e confirmar que `GET /health` é a **única** rota da aplicação (SC-008)
 
 **Checkpoint**: os passos 2 a 6 do `quickstart.md` passam. Esta é a fatia mínima entregável.
 

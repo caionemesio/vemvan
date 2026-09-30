@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# Expo
+.expo/
+.expo-shared/
+
+# Environment files - never commit credentials
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# Coverage
+coverage/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Temp
+*.tmp
