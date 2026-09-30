@@ -140,12 +140,12 @@ package compartilhado.
 
 **Depende de**: ao menos uma aplicação existir (US1 ou US2), para haver onde verificar a importação.
 
-- [ ] T039 [US4] Criar `packages/shared/package.json` com nome `@vemvan/shared`, `main: dist/index.js`, `types: dist/index.d.ts` e script `build` com `tsc` (research.md D2)
-- [ ] T040 [US4] Criar `packages/shared/tsconfig.json` estendendo `tsconfig.base.json`, com `declaration: true` e saída em `dist/`
-- [ ] T041 [US4] Implementar `packages/shared/src/index.ts` com um único export trivial e **sem domínio** — nada de `UserRole`, `TripStatus`, DTOs ou enums de negócio (FR-017, data-model.md)
-- [ ] T042 [US4] Definir `build:shared` no `package.json` da raiz compilando `packages/shared` para `dist/`
-- [ ] T043 [US4] Adicionar `@vemvan/shared` como dependência de `apps/api` e verificar que a importação resolve em runtime e na verificação de tipos (FR-016)
-- [ ] T044 [US4] Verificar a mesma importação em `apps/admin` e, se US3 estiver concluída, confirmar que o Metro também resolve o package em `apps/mobile`
+- [X] T039 [US4] Criar `packages/shared/package.json` com nome `@vemvan/shared`, `main: dist/index.js`, `types: dist/index.d.ts` e script `build` com `tsc` (research.md D2)
+- [X] T040 [US4] Criar `packages/shared/tsconfig.json` estendendo `tsconfig.base.json`, com `declaration: true` e saída em `dist/`
+- [X] T041 [US4] Implementar `packages/shared/src/index.ts` com um único export trivial e **sem domínio** — nada de `UserRole`, `TripStatus`, DTOs ou enums de negócio (FR-017, data-model.md)
+- [X] T042 [US4] Definir `build:shared` no `package.json` da raiz compilando `packages/shared` para `dist/`
+- [X] T043 [US4] Adicionar `@vemvan/shared` como dependência de `apps/api` e verificar que a importação resolve em runtime e na verificação de tipos (FR-016)
+- [X] T044 [US4] Verificar a mesma importação em `apps/admin` e, se US3 estiver concluída, confirmar que o Metro também resolve o package em `apps/mobile`
 
 **Checkpoint**: `npm run build:shared` seguido de `npm run typecheck` passa em todos os pacotes.
 

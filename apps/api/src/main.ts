@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { getConnectionToken } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
+import { PRODUCT_NAME } from '@vemvan/shared';
 
 import { AppModule } from './app.module.js';
 
@@ -49,7 +50,7 @@ async function bootstrap(): Promise<void> {
 
   const port = Number(process.env.PORT ?? 3000);
   await app.listen(port);
-  console.log(`VemVan API listening on port ${port}`);
+  console.log(`${PRODUCT_NAME} API listening on port ${port}`);
 }
 
 await bootstrap().catch((error: unknown) => {

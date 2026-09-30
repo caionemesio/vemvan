@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { PRODUCT_NAME } from '@vemvan/shared';
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text style={styles.brand}>VemVan</Text>
+      <Text style={styles.brand}>{PRODUCT_NAME}</Text>
       <Text style={styles.status}>O aplicativo está funcionando.</Text>
       <StatusBar style="auto" />
     </View>

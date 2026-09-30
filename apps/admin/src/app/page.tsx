@@ -1,3 +1,5 @@
+import { PRODUCT_NAME } from "@vemvan/shared";
+
 import { Button } from "@/components/ui/button";
 
 const stack = ["Next.js", "Tailwind CSS", "shadcn/ui"];
@@ -9,7 +11,7 @@ export default function Home() {
         <p className="text-sm font-medium text-muted-foreground">
           Painel administrativo
         </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">VemVan</h1>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight">{PRODUCT_NAME}</h1>
         <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
           A fundação do painel está no ar. As funcionalidades de gestão chegam
           nas próximas entregas.

@@ -50,6 +50,19 @@ do `shared` antes das aplicações, encadeado nos scripts da raiz.
 **Nota de risco**: enquanto o `shared` não tiver conteúdo real, a validação de FR-016 depende de um
 export trivial. Ver `data-model.md`.
 
+**Implementação (US4, 2026-09-30)**:
+- Export único: `PRODUCT_NAME = 'VemVan'` — nome do produto, sem domínio (FR-017). É consumido de
+  verdade pelos três apps (log de boot da API, `<h1>` do Admin, título da tela do Mobile), para que
+  o `typecheck` e o runtime exercitem a importação em vez de ela existir só em teoria.
+- Saída **CommonJS** (o `package.json` do `shared` não declara `"type"`). A API é ESM (`nodenext`) e
+  importa por *named import*; o Node resolve via detecção de exports do CJS — verificado em runtime.
+  O Admin (bundler do Next) e o Metro consomem CJS sem configuração.
+- `tsconfig.base.json` passou de `module: commonjs` / `moduleResolution: node` para **`nodenext`**:
+  o TypeScript 6 deprecou `moduleResolution: node` (erro TS5107). Nenhum app percebia porque todos
+  sobrescrevem essas opções; o `shared` foi o primeiro pacote a herdá-las da base.
+- Verificação no Mobile: o bundle Android exportado contém `packages/shared/dist/index.js`, e o
+  `agent-device` confirmou o texto na tela do emulador (D10).
+
 ---
 
 ## D3 — Integração NestJS ↔ Sequelize
