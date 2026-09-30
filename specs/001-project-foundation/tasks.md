@@ -172,12 +172,12 @@ package compartilhado.
 
 **Purpose**: Fechar os critérios de sucesso que atravessam todas as stories.
 
-- [ ] T049 Preencher `typecheck` no `package.json` da raiz agregando a verificação de tipos dos 4 pacotes (SC-006)
-- [ ] T050 Preencher `build` no `package.json` da raiz encadeando `shared` → `api` → `admin`, respeitando a ordem exigida por research.md D2 (SC-006)
-- [ ] T051 Verificar a portabilidade do banco: apontar `apps/api/.env` para outro PostgreSQL e confirmar que a API funciona com **0 arquivos de código alterados** (SC-005, FR-011)
-- [ ] T052 Auditar o escopo (SC-008): 0 entidades de domínio, 0 rotas além de `GET /health`, 0 dependências de mapas/localização/notificações/realtime em qualquer `package.json`, `packages/shared` sem domínio, telas sem MVVM
-- [ ] T053 Confirmar a ausência de Prisma e de qualquer chamada a `sequelize.sync()` em todo o repositório (FR-006, FR-007)
-- [ ] T054 Executar o `quickstart.md` inteiro, do passo 1 ao 12, em sequência e sem pular os cenários negativos dos passos 5 e 6
+- [X] T049 Preencher `typecheck` no `package.json` da raiz agregando a verificação de tipos dos 4 pacotes (SC-006)
+- [X] T050 Preencher `build` no `package.json` da raiz encadeando `shared` → `api` → `admin`, respeitando a ordem exigida por research.md D2 (SC-006)
+- [X] T051 Verificar a portabilidade do banco: apontar `apps/api/.env` para outro PostgreSQL e confirmar que a API funciona com **0 arquivos de código alterados** (SC-005, FR-011)
+- [X] T052 Auditar o escopo (SC-008): 0 entidades de domínio, 0 rotas além de `GET /health`, 0 dependências de mapas/localização/notificações/realtime em qualquer `package.json`, `packages/shared` sem domínio, telas sem MVVM
+- [X] T053 Confirmar a ausência de Prisma e de qualquer chamada a `sequelize.sync()` em todo o repositório (FR-006, FR-007)
+- [ ] T054 Executar o `quickstart.md` inteiro, do passo 1 ao 12, em sequência e sem pular os cenários negativos dos passos 5 e 6 — **parcial (2026-09-30)**: passos 1–11 verificados (passo 3 executado manualmente pelo usuário, pois `npm run db:migrate*` é bloqueado para agentes pela regra de permissão dele); pendente apenas o passo 12 (onboarding por outra pessoa em máquina limpa)
 
 ---
 

@@ -18,6 +18,8 @@
     "db:down": "docker compose --env-file apps/api/.env down",
     "db:migrate": "npm run db:migrate --workspace apps/api",
     "db:migrate:undo": "npm run db:migrate:undo --workspace apps/api",
-    "build:shared": "npm run build --workspace packages/shared"
+    "build:shared": "npm run build --workspace packages/shared",
+    "typecheck": "npm run build:shared && npm run typecheck --workspaces",
+    "build": "npm run build:shared && npm run build --workspace apps/api && npm run build --workspace apps/admin"
   }
 }
